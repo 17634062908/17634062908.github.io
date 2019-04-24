@@ -1978,7 +1978,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #12af38;
+  background: #f79a6e;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -3151,4 +3151,8 @@ pre .javascript .function {
   padding: 5px 36px 5px 36px !important;
   background-color: #fff;
   box-shadow: none;
+}
+.links-of-author-item {
+  margin: 5px 0 0;
+  width: 35%;
 }
