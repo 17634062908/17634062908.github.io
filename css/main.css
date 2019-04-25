@@ -1978,7 +1978,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #6c17c7;
+  background: #ff26ff;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -3155,4 +3155,14 @@ pre .javascript .function {
 .links-of-author-item {
   margin: 5px 0 0;
   width: 35%;
+}
+.posts-expand .post-body img {
+  box-sizing: border-box;
+  margin: auto;
+  padding: 3px;
+}
+.links-of-blogroll {
+  text-align: center;
+  margin-top: 20px;
+  padding: 3px 0 0;
 }
