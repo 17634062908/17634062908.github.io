@@ -1116,7 +1116,16 @@
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-backstretch/2.0.4/jquery.backstretch.min.js"></script>;
   <script>
-	$("body").backstretch("/images/bg.jpg");
+	$(function () {
+    $.backstretch([  
+		  "/images/bg.jpg",
+          "/images/bg1.jpg",
+          "/images/bg2.jpg",
+          "/images/bg3.jpg",
+		  "/images/bg4.jpg",
+		], { duration: 15000, fade: 1500 });  
+	});
+
   </script>
 </body>
 </html>
