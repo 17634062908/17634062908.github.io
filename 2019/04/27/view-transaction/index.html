@@ -104,14 +104,14 @@
 <meta property="og:site_name" content="Jesse">
 <meta property="og:description" content="&amp;emsp;&amp;emsp;物化视图，它是用于预先计算并保存表连接或聚集等耗时较多的操作的结果，这样，在执行查询时，就可以避免进行这些耗时的操作，从而快速的得到结果。物化视图有很多方面和索引很相似：使用物化视图的目的是为了提高查询性能；物化视图对应用透明，增加和删除物化视图不会影响应用程序中SQL 语句的正确性和有效性；物化视图需要占用存储空间；当基表发生变化时，物化视图也应当刷新。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://17634062908.github.io/2019/04/27/view-transaction/mysql.jpg">
+<meta property="og:image" content="https://17634062908.github.io/2019/04/27/view-transaction/mysql.png">
 <meta property="og:image" content="https://17634062908.github.io/2019/04/27/view-transaction/markdown-img-paste-20190327223126157.png">
 <meta property="og:image" content="https://17634062908.github.io/2019/04/27/view-transaction/markdown-img-paste-20190327220036136.png">
-<meta property="og:updated_time" content="2019-04-27T02:49:40.674Z">
+<meta property="og:updated_time" content="2019-04-27T02:54:32.698Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mysql基础之物化视图与事务">
 <meta name="twitter:description" content="&amp;emsp;&amp;emsp;物化视图，它是用于预先计算并保存表连接或聚集等耗时较多的操作的结果，这样，在执行查询时，就可以避免进行这些耗时的操作，从而快速的得到结果。物化视图有很多方面和索引很相似：使用物化视图的目的是为了提高查询性能；物化视图对应用透明，增加和删除物化视图不会影响应用程序中SQL 语句的正确性和有效性；物化视图需要占用存储空间；当基表发生变化时，物化视图也应当刷新。">
-<meta name="twitter:image" content="https://17634062908.github.io/2019/04/27/view-transaction/mysql.jpg">
+<meta name="twitter:image" content="https://17634062908.github.io/2019/04/27/view-transaction/mysql.png">
 
 
 
@@ -421,7 +421,7 @@
       
 
       
-        <p><img src="/2019/04/27/view-transaction/mysql.jpg" alt><br>&emsp;&emsp;物化视图，它是用于预先计算并保存表连接或聚集等耗时较多的操作的结果，这样，在执行查询时，就可以避免进行这些耗时的操作，从而快速的得到结果。物化视图有很多方面和索引很相似：使用物化视图的目的是为了提高查询性能；物化视图对应用透明，增加和删除物化视图不会影响应用程序中SQL 语句的正确性和有效性；物化视图需要占用存储空间；当基表发生变化时，物化视图也应当刷新。<br><a id="more"></a></p>
+        <p><img src="/2019/04/27/view-transaction/mysql.png" alt><br>&emsp;&emsp;物化视图，它是用于预先计算并保存表连接或聚集等耗时较多的操作的结果，这样，在执行查询时，就可以避免进行这些耗时的操作，从而快速的得到结果。物化视图有很多方面和索引很相似：使用物化视图的目的是为了提高查询性能；物化视图对应用透明，增加和删除物化视图不会影响应用程序中SQL 语句的正确性和有效性；物化视图需要占用存储空间；当基表发生变化时，物化视图也应当刷新。<br><a id="more"></a></p>
 <h2 id="1-物化视图"><a href="#1-物化视图" class="headerlink" title="1. 物化视图"></a>1. 物化视图</h2><p>&emsp;&emsp;物化视图是相对于视图而言的，但是两者实际上并没有什么关系就如java/javaScript一样</p>
 <p>&emsp;&emsp;首先mysql的视图不是一种物化视图，他相当于一个虚拟表，本身并不存储数据，当sql在操作视图时所有数据都是从其他表中查询出来的。者带来的问题是使用视图并不能将常用数据分离出来，优化查询速度，切操作视图的很多命令和普通标一样，这回导致在业务中无法通过sql区分表和视图，是代码变得复杂。</p>
 <p>&emsp;&emsp;视图是简化设计，清晰编码的东西，他并不是提高性能的，他的存在只会降低性能（如一个视图7个表关联，另一个视图8个表，程序员不知道，觉得很方便，把两个视图关联再做一个视图，那就惨了），他的存在未了在设计上的方便性</p>
