@@ -22,8 +22,8 @@
   <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
   <script>
     (function(){
-        if(''){
-            if (prompt('请输入文章密码') !== ''){
+        if('jesse'){
+            if (prompt('请输入文章密码') !== 'jesse'){
                 alert('密码错误');
                 history.back();
             }
@@ -85,7 +85,7 @@
 
 
 
-  <meta name="keywords" content="职业生涯,技术规划,">
+  <meta name="keywords" content="Mysql基础,Mysql优化,">
 
 
 
@@ -96,20 +96,22 @@
 
 
 
-<meta name="description" content="&amp;emsp;&amp;emsp;很多人说编程是艺术。我不否认这句话，但编程和“八大艺术”有最根本的区别：艺术的形式极为重要，但编程形式却不是那么的重要。">
-<meta name="keywords" content="职业生涯,技术规划">
+<meta name="description" content="&amp;emsp;&amp;emsp;物化视图，它是用于预先计算并保存表连接或聚集等耗时较多的操作的结果，这样，在执行查询时，就可以避免进行这些耗时的操作，从而快速的得到结果。物化视图有很多方面和索引很相似：使用物化视图的目的是为了提高查询性能；物化视图对应用透明，增加和删除物化视图不会影响应用程序中SQL 语句的正确性和有效性；物化视图需要占用存储空间；当基表发生变化时，物化视图也应当刷新。">
+<meta name="keywords" content="Mysql基础,Mysql优化">
 <meta property="og:type" content="article">
-<meta property="og:title" content="追寻本质还是流于形式">
-<meta property="og:url" content="https://17634062908.github.io/2019/04/24/work/index.html">
+<meta property="og:title" content="Mysql基础之物化视图与事务">
+<meta property="og:url" content="https://17634062908.github.io/2019/04/27/view-transaction/index.html">
 <meta property="og:site_name" content="Jesse">
-<meta property="og:description" content="&amp;emsp;&amp;emsp;很多人说编程是艺术。我不否认这句话，但编程和“八大艺术”有最根本的区别：艺术的形式极为重要，但编程形式却不是那么的重要。">
+<meta property="og:description" content="&amp;emsp;&amp;emsp;物化视图，它是用于预先计算并保存表连接或聚集等耗时较多的操作的结果，这样，在执行查询时，就可以避免进行这些耗时的操作，从而快速的得到结果。物化视图有很多方面和索引很相似：使用物化视图的目的是为了提高查询性能；物化视图对应用透明，增加和删除物化视图不会影响应用程序中SQL 语句的正确性和有效性；物化视图需要占用存储空间；当基表发生变化时，物化视图也应当刷新。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://17634062908.github.io/2019/04/24/work/01.jpg">
-<meta property="og:updated_time" content="2019-04-25T08:15:12.200Z">
+<meta property="og:image" content="https://17634062908.github.io/2019/04/27/view-transaction/mysql.jpg">
+<meta property="og:image" content="https://17634062908.github.io/2019/04/27/view-transaction/assets/markdown-img-paste-20190327223126157.png">
+<meta property="og:image" content="https://17634062908.github.io/2019/04/27/view-transaction/assets/markdown-img-paste-20190327220036136.png">
+<meta property="og:updated_time" content="2019-04-27T02:39:09.807Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="追寻本质还是流于形式">
-<meta name="twitter:description" content="&amp;emsp;&amp;emsp;很多人说编程是艺术。我不否认这句话，但编程和“八大艺术”有最根本的区别：艺术的形式极为重要，但编程形式却不是那么的重要。">
-<meta name="twitter:image" content="https://17634062908.github.io/2019/04/24/work/01.jpg">
+<meta name="twitter:title" content="Mysql基础之物化视图与事务">
+<meta name="twitter:description" content="&amp;emsp;&amp;emsp;物化视图，它是用于预先计算并保存表连接或聚集等耗时较多的操作的结果，这样，在执行查询时，就可以避免进行这些耗时的操作，从而快速的得到结果。物化视图有很多方面和索引很相似：使用物化视图的目的是为了提高查询性能；物化视图对应用透明，增加和删除物化视图不会影响应用程序中SQL 语句的正确性和有效性；物化视图需要占用存储空间；当基表发生变化时，物化视图也应当刷新。">
+<meta name="twitter:image" content="https://17634062908.github.io/2019/04/27/view-transaction/mysql.jpg">
 
 
 
@@ -139,13 +141,13 @@
 
 
 
-  <link rel="canonical" href="https://17634062908.github.io/2019/04/24/work/">
+  <link rel="canonical" href="https://17634062908.github.io/2019/04/27/view-transaction/">
 
 
 
 
 
-  <title>追寻本质还是流于形式 | Jesse</title>
+  <title>Mysql基础之物化视图与事务 | Jesse</title>
   
 
 
@@ -308,7 +310,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://17634062908.github.io/2019/04/24/work/">
+    <link itemprop="mainEntityOfPage" href="https://17634062908.github.io/2019/04/27/view-transaction/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Jesse">
@@ -325,16 +327,10 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">追寻本质还是流于形式</h1>
+          <h1 class="post-title" itemprop="name headline">Mysql基础之物化视图与事务</h1>
         
 
         <div class="post-meta">
-			
-				<strong>
-					<i class="fa fa-thumb-tack"></i>
-					<font>置顶</font>
-				</strong>
-				<span class="post-meta-divider">|</span>
 			
             
               <span class="post-meta-item-icon">
@@ -343,8 +339,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-24T16:27:14+08:00">
-                2019-04-24
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-27T10:05:56+08:00">
+                2019-04-27
               </time>
             
 
@@ -366,8 +362,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/闲言碎语/" itemprop="url" rel="index">
-                    <span itemprop="name">闲言碎语</span>
+                  <a href="/categories/Mysql/" itemprop="url" rel="index">
+                    <span itemprop="name">Mysql</span>
                   </a>
                 </span>
 
@@ -385,8 +381,8 @@
                 <i class="fa fa-comment-o"></i>
               </span>
               
-                <a href="/2019/04/24/work/#SOHUCS" itemprop="discussionUrl">
-                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2019/04/24/work/" itemprop="commentsCount"></span>
+                <a href="/2019/04/27/view-transaction/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2019/04/27/view-transaction/" itemprop="commentsCount"></span>
                 </a>
               
             
@@ -394,7 +390,7 @@
 
           
           
-             <span id="/2019/04/24/work/" class="leancloud_visitors" data-flag-title="追寻本质还是流于形式">
+             <span id="/2019/04/27/view-transaction/" class="leancloud_visitors" data-flag-title="Mysql基础之物化视图与事务">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -425,32 +421,54 @@
       
 
       
-        <p><img src="/2019/04/24/work/01.jpg" alt><br>&emsp;&emsp;很多人说编程是艺术。我不否认这句话，但编程和“八大艺术”有最根本的区别：艺术的形式极为重要，但编程形式却不是那么的重要。<br><a id="more"></a><br>&emsp;&emsp;追寻事物本质应该是人类与生俱来的一种特性。看看我们在童年时向我们父母提出的那些啼笑皆非的问题，再想想我们小时候拿着放大镜对着一白纸在正午的烈日下一蹲就是一小时，只是为了去点燃这张纸。那是童年最原始、最纯真的对于真理和本质追寻的行为。</p>
-<p>&emsp;&emsp;可20多岁的我们，却丧失了这种最纯真的好奇心。我们醉心于那些表面的、外在的、甚至是虚无的成就感。我们每天循环着尝试使用各种工具解决各种问题，以此来换取一些微薄的酬劳。我们会用各种不同的编程手法、不同的思维来解决同一个问题，以此来判别你与竞争对手的水平高低；我们也会彼此竞争式的学习更多的语言、更好的框架、更新的技术，可我们所谓的学习，却仅仅只是“会用”。</p>
-<p>&emsp;&emsp;时间久了，累了，厌倦了，就觉得没有意思了。</p>
-<p>&emsp;&emsp;你迷茫了。迷茫是再正常不过的了。跟着形式跑，看不到事物的本质，你永远会觉得疲倦。</p>
-<p>&emsp;&emsp;很多人说编程是艺术。我不否认这句话，但编程和“八”大艺术（第八大艺术是电影，这个还有不少争论）有最根本的区别：艺术的形式极为重要，但编程形式却不是那么的重要。</p>
-<p>&emsp;&emsp;拿电影来举例，很多经典的电影其实核心内容是及其简单的，或者说导演想表达的内心世界也无非就是：人性本善/本恶、奋斗出奇迹、爱情诚可贵、自由价更高等常规主题。但经典电影之所以伟大，就在于导演会用非常规的叙事手法，奇妙的镜头语言，符合人物内心的光影特效来完成一部出色的电影。道理总有讲完的一天，但艺术之所以具有长久的生命力和创造力，或许就在于形式的百花齐放。你会担心这世界上由于题材的枯竭而再也写不出小说或者拍不出电影吗？</p>
-<p>&emsp;&emsp;不会。爱情都是同样的爱情，但表现爱情的手法却永远取之不竭，用之不尽。</p>
-<p>&emsp;&emsp;可编程不同。你用面向对象还是面向过程，亦或是是否使用设计模式，这都远远不能掩盖一个事实：你只是解决了同一个问题。</p>
-<p>&emsp;&emsp;那编程的形式重要吗？</p>
-<p>&emsp;&emsp;编程中的形式远没有形式之于艺术重要。问题在于目的的不同：艺术更多时候是为了去表现，让人们感受形式的美好；但编程的根本目的不在于形式，而在于解决问题。</p>
-<p>&emsp;&emsp;如果你太在意编程中的形式，而忽略了编程中的“本质”，这实在是不可取的。形式大多充满变化，描述一个爱情故事可以用诗词赋、可以用电影、可以用绘画，而每种艺术载体在描述爱情时，又可以幻化出千奇百怪的手法。同样，解决一个问题，可以用A语言、也可以用B语言、C语言、D语言、J语言，可以用F框架、可以用D框架、可以用T框架。</p>
-<p>&emsp;&emsp;可问题是，这些不同的语言和框架真的对于解决问题是如此的重要吗？也许你会举出开发效率、性能等千万条理由来反驳我，但你忽略了一个本质，他们没有改变这些不同的语言和框架都只是解决了同一个问题的本质。过分追求这种不同语言、不同框架的形式，对一个程序员来说是极为不正确的。</p>
-<p>&emsp;&emsp;我们这个社会里的很多媒体对于技术的引导是不正确的。一个月学会大数据的真实意思是你只学会了大数据API的调用，现在大数据不热了，你又开始追寻机器学习和区块链了。可这大数据也好、AI、区块链也好，这都是形式。</p>
-<p>&emsp;&emsp;你不断盲目的去学习形式，只是因为你内心的贪婪和焦虑。这个时代正在以疯狂的速度肆无忌惮的制造新产品：每天都有无数的楼房拔地而起，每天都有几百本书籍出版，每天也有很多的新技术、新语言在酝酿。</p>
-<p>&emsp;&emsp;于是你很焦虑，害怕被这个时代淘汰。这种焦虑诱发出了人类的本性：贪婪。我们疯狂的购买书籍、购买课程、购买一切看上去可以让我们成长的物件，数量变成了这个时代知识的计量单位，数量可以满足我们的贪婪，同时又在一定程度上解决我们的焦虑。</p>
-<p>&emsp;&emsp;但你是跑不过这个时代形式的变化的。时代的形式是由千千万万比你还优秀的人共同缔造的，而你只是其中的一个个体，你如何以一抵万？</p>
-<p>&emsp;&emsp;其实无需太过于恐惧变化，大多数事物发展的规律是由量变转化成质变，你要担心的是质变，而一个时代要想产生革命性的质变，这需要的时间太漫长了。你实在无需为形式的变化烦恼太多。</p>
-<p>&emsp;&emsp;任何一项技术或者产品的制造都是一条链式的，越是链条的头部，所获取的资源越多，所牟取的利益越大。你看到lenvo的电脑卖的很好，但你需要知道intel的CPU卖的更好，他掌握了链条的头部资源和技术，而这些技术具备一定的普适性，他即可以把CPU卖给联想也可以卖给弘基。因特尔靠技术赚钱的实质在于，他抓住了计算机制造业里的“本质”。</p>
-<p>&emsp;&emsp;再比如现在大量的茶水连锁，掌握茶的制作工艺的头部技术拥有者才能撑起这个链条，做起各种加盟。头部的核心本质掌握，让这些技术的拥有者形成一种辐射效应，每一个辐射出去的链条，源头都在辐射的核心点。</p>
-<p>&emsp;&emsp;放到编程这个行业也是一样。越接近本质，收益越高。你会发现，做算法的收入远比做业务的要高，搞C语言的大多数情况下的平均收入都要高于搞PHP、Java的；而那些能做AI、机器学习的也是因为他们掌握了大量智能领域的本质算法和模型，而绝对不是因为他们会Python。</p>
-<p>&emsp;&emsp;有些人就是比你更接近事物和原理的本质，他们是辐射的核心，你只是他的一个加盟商。资源和利益会随着辐射链条的延长而逐渐趋于稀薄。</p>
-<p>&emsp;&emsp;去探寻下本质，去深挖一下语言的特性，框架的原理，多去学学算法与数据结构，多去复习下早已遗忘的数学，这真的是个不错的选择。从编程的角度来看，很多的框架也好语言也好，都只是形式在变，但他就是旧瓶装新酒啊。</p>
-<p>&emsp;&emsp;童年的那份好奇心，那些对事物本质追寻的可笑问题，可能我们是再也找不回来了。也许这也就是为什么童年弥足珍贵的原因。但你依然需要记住，追寻本质才是这个不断变化的时代最有效的生存守则。</p>
-<p>&emsp;&emsp;你看，其实我这篇文章也只是讲了一个浅显的道理。所以，形式重要吗？对文学来说很重要，但至于现实，形式屁都不是。</p>
-<blockquote><p>作者：7七月<br>链接：<a href="http://www.imooc.com/article/24509" target="_blank" rel="noopener">http://www.imooc.com/article/24509</a><br>来源：慕课网</p>
+        <p><img src="/2019/04/27/view-transaction/mysql.jpg" alt><br>&emsp;&emsp;物化视图，它是用于预先计算并保存表连接或聚集等耗时较多的操作的结果，这样，在执行查询时，就可以避免进行这些耗时的操作，从而快速的得到结果。物化视图有很多方面和索引很相似：使用物化视图的目的是为了提高查询性能；物化视图对应用透明，增加和删除物化视图不会影响应用程序中SQL 语句的正确性和有效性；物化视图需要占用存储空间；当基表发生变化时，物化视图也应当刷新。<br><a id="more"></a></p>
+<h2 id="1-物化视图"><a href="#1-物化视图" class="headerlink" title="1. 物化视图"></a>1. 物化视图</h2><p>&emsp;&emsp;物化视图是相对于视图而言的，但是两者实际上并没有什么关系就如java/javaScript一样</p>
+<p>&emsp;&emsp;首先mysql的视图不是一种物化视图，他相当于一个虚拟表，本身并不存储数据，当sql在操作视图时所有数据都是从其他表中查询出来的。者带来的问题是使用视图并不能将常用数据分离出来，优化查询速度，切操作视图的很多命令和普通标一样，这回导致在业务中无法通过sql区分表和视图，是代码变得复杂。</p>
+<p>&emsp;&emsp;视图是简化设计，清晰编码的东西，他并不是提高性能的，他的存在只会降低性能（如一个视图7个表关联，另一个视图8个表，程序员不知道，觉得很方便，把两个视图关联再做一个视图，那就惨了），他的存在未了在设计上的方便性</p>
+<p>&emsp;&emsp;物化视图可以帮助加快严重依赖某些聚合结果的查询。<br>如果插入速度不是问题，则此功能可以帮助减少系统上的读取负载。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="keyword">count</span>(*),<span class="keyword">sum</span>(pro_price), <span class="keyword">sum</span>(pro_num),<span class="keyword">avg</span>(pro_price), <span class="keyword">avg</span>(pro_num) <span class="keyword">from</span> purchase_order</span><br><span class="line"></span><br><span class="line">物化视图 可以理解成 就是单独再创建一张统计表吗</span><br><span class="line"></span><br><span class="line">把数据记录 <span class="keyword">select</span> <span class="keyword">count</span>(*),<span class="keyword">sum</span>(pro_price), <span class="keyword">sum</span>(pro_num),<span class="keyword">avg</span>(pro_price), <span class="keyword">avg</span>(pro_num) <span class="keyword">from</span> purchase_order =&gt;&gt;  purchase_mv</span><br><span class="line"></span><br><span class="line">根据项目的需求 (数据实时性)</span><br><span class="line">要定时更新数据, ==&gt;&gt; 存储过程 <span class="keyword">call</span></span><br><span class="line">开销小,误差大一点</span><br><span class="line"></span><br><span class="line">中间表 使用视图是避免因为 purchase_mv 表的结果修改,而影响到存储过程与触发器的查询<span class="keyword">sql</span>语句的修改</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">view</span> por_view <span class="keyword">as</span></span><br><span class="line">	<span class="keyword">select</span></span><br><span class="line">			supply_name,</span><br><span class="line">      <span class="keyword">count</span>(*) pro_count,</span><br><span class="line">			<span class="keyword">sum</span>(pro_price) pro_price_sum,</span><br><span class="line">			<span class="keyword">avg</span>(pro_price) pro_price_avg,</span><br><span class="line">			<span class="keyword">sum</span>(pro_num) pro_num_sum,</span><br><span class="line">			<span class="keyword">avg</span>(pro_num) pro_num_avg</span><br><span class="line">	<span class="keyword">from</span></span><br><span class="line">			purchase_order</span><br><span class="line">	<span class="keyword">group</span> <span class="keyword">by</span></span><br><span class="line">			supply_name;</span><br><span class="line"></span><br><span class="line">定时执行这样的sql</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> purchase_mv <span class="keyword">select</span> * <span class="keyword">from</span> por_view;</span><br><span class="line"></span><br><span class="line">第一步获取 需要获取原有统计数据 <span class="keyword">select</span> * <span class="keyword">from</span> por_view</span><br><span class="line">第二步写入 purchase_mv</span><br><span class="line"></span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">PROCEDURE</span> refresh_mv_now;</span><br><span class="line">DELIMITER $$</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">PROCEDURE</span> refresh_mv_now ()</span><br><span class="line"><span class="keyword">BEGIN</span></span><br><span class="line">  <span class="keyword">TRUNCATE</span> <span class="keyword">TABLE</span> purchase_mv;</span><br><span class="line">  <span class="keyword">INSERT</span> <span class="keyword">INTO</span> purchase_mv <span class="keyword">SELECT</span> * <span class="keyword">FROM</span> por_view;</span><br><span class="line"><span class="keyword">END</span>;</span><br><span class="line">$$</span><br><span class="line">DELIMITER ;</span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> purchase_mv;</span><br><span class="line"></span><br><span class="line">定时执行下面的sql,你可以使用你所会的方法</span><br><span class="line"><span class="keyword">call</span> refresh_mv_now ();</span><br><span class="line"></span><br><span class="line">实时更新数据, ==&gt;&gt; 触发器 使用触发器,是很会影响数据库的写操作的性能</span><br><span class="line">开销大</span><br><span class="line"><span class="keyword">drop</span> <span class="keyword">trigger</span> purchase_mv_trigger_ins;</span><br><span class="line">DELIMITER $$</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TRIGGER</span> purchase_mv_trigger_ins <span class="keyword">AFTER</span> <span class="keyword">INSERT</span> <span class="keyword">ON</span> purchase_order <span class="keyword">FOR</span> <span class="keyword">EACH</span> <span class="keyword">ROW</span></span><br><span class="line"><span class="keyword">BEGIN</span></span><br><span class="line">	<span class="keyword">SET</span> @old_pro_price_sum = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">SET</span> @old_pro_price_avg = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">SET</span> @old_pro_num_sum = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">SET</span> @old_pro_num_avg = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">SET</span> @old_pro_count = <span class="number">0</span>;</span><br><span class="line">	<span class="comment"># 查询出之前的信息然后记录到不同的变量中</span></span><br><span class="line">	<span class="keyword">SELECT</span></span><br><span class="line">		<span class="keyword">IFNULL</span>(pro_price_sum,<span class="number">0</span>),<span class="keyword">IFNULL</span>(pro_price_avg,<span class="number">0</span>),</span><br><span class="line">		<span class="keyword">IFNULL</span>(pro_num_sum,<span class="number">0</span>),<span class="keyword">IFNULL</span>(pro_num_avg,<span class="number">0</span>),</span><br><span class="line">		<span class="keyword">IFNULL</span>(pro_count,<span class="number">0</span>)</span><br><span class="line">	<span class="keyword">FROM</span></span><br><span class="line">		purchase_mv</span><br><span class="line">	<span class="keyword">WHERE</span></span><br><span class="line">		supply_name = NEW.supply_name</span><br><span class="line">	<span class="keyword">INTO</span></span><br><span class="line">		@old_pro_price_sum,@old_pro_price_avg,@old_pro_num_sum,@old_pro_num_avg,@old_pro_count;</span><br><span class="line">	<span class="comment"># 然后再去计算更新操作之后的内容</span></span><br><span class="line">	<span class="keyword">SET</span> @new_pro_count = @old_pro_count + <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">SET</span> @new_pro_price_sum = @old_pro_price_sum + NEW.pro_price;</span><br><span class="line">	<span class="keyword">SET</span> @new_pro_price_avg = @new_pro_price_sum / @new_pro_count;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">SET</span> @new_pro_num_sum = @old_pro_num_sum + NEW.pro_num;</span><br><span class="line">	<span class="keyword">SET</span> @new_pro_num_avg = @new_pro_num_sum / @new_pro_count;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">REPLACE</span> <span class="keyword">INTO</span></span><br><span class="line">		purchase_mv</span><br><span class="line">	<span class="keyword">VALUES</span>(</span><br><span class="line">		NEW.supply_name, @new_pro_count,</span><br><span class="line">		@new_pro_price_sum, <span class="keyword">IFNULL</span>(@new_pro_price_avg, <span class="number">0</span>),</span><br><span class="line">		@new_pro_num_sum, <span class="keyword">IFNULL</span>(@new_pro_num_avg, <span class="number">0</span>)</span><br><span class="line">	);</span><br><span class="line"><span class="keyword">END</span>;</span><br><span class="line">$$</span><br><span class="line">DELIMITER ;</span><br><span class="line"></span><br><span class="line">= 表可能会改变</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> purchase_mv(</span><br><span class="line">	supply_name <span class="built_in">VARCHAR</span>(<span class="number">60</span>)  <span class="keyword">NOT</span> <span class="literal">NULL</span> ,</span><br><span class="line">	pro_count <span class="built_in">INT</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">	pro_price_sum <span class="built_in">INT</span>  <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">	pro_price_avg <span class="built_in">FLOAT</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">	pro_num_sum <span class="built_in">INT</span>  <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">	pro_num_avg <span class="built_in">FLOAT</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="keyword">UNIQUE</span> <span class="keyword">INDEX</span> supply_name (supply_name)</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">物化视图 -&gt; 存储过程 和 触发器的 综合应用</span><br><span class="line">表的数据大 : 有些内容很频繁查询</span><br></pre></td></tr></table></figure>
+<h4 id="1-2-存储过程与触发器区别是？"><a href="#1-2-存储过程与触发器区别是？" class="headerlink" title="1.2 存储过程与触发器区别是？"></a>1.2 存储过程与触发器区别是？</h4><p>存储过程 =&gt; 主动 技能 ( 函数 )<br>触发器   =&gt; 被动 技能 ( 函数 )</p>
+<h2 id="2-事务"><a href="#2-事务" class="headerlink" title="2. 事务:"></a>2. 事务:</h2><h5 id="1-0-MyISAM实现事务"><a href="#1-0-MyISAM实现事务" class="headerlink" title="1.0 MyISAM实现事务"></a>1.0 MyISAM实现事务</h5><p>&emsp;&emsp;通过表锁实现伪事务</p>
+<h5 id="1-1-事务的概念"><a href="#1-1-事务的概念" class="headerlink" title="1.1 事务的概念"></a>1.1 事务的概念</h5><p>&emsp;&emsp;事务处理可以确保除非事务性单元内的所有操作都成功完成，否则不会永远更新面向数据的资源。通过将一组相关操作组合为一个要么全部成功要么全部失败的单元，可以简化错误恢复病史应用程序更加可靠。一个逻辑共奏单元要成为事务，必须满足所谓的ACID（原子性、一致性、隔离性和持久性）属性：</p>
+<ol>
+<li>原子性（A）<ul>
+<li>对于数据修改，要么全部都执行，要么全都不执行。</li>
+</ul>
+</li>
+<li>隔离性（C）<ul>
+<li>在所有的操作没有执行完毕之前，其他会话不能够看到中间改变的过程。</li>
+</ul>
+</li>
+<li>一致性（I）<ul>
+<li>事务发生前和发生后，根据数据的规则，总额应该匹配。</li>
+</ul>
+</li>
+<li>持久性（D）<ul>
+<li>事务一旦被提交，其结果就是永久性的，系统崩溃也不会影响</li>
+</ul>
+</li>
+</ol>
+<p>&emsp;&emsp;应用场景:使用场景一般涉及到个人财务信息的时候都会使用到，比如上图的积分计算,还有订单购物车等</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">start</span> <span class="keyword">transaction</span>; 开启事务</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> <span class="keyword">count</span> (prefix,<span class="keyword">count</span>,historyCount)<span class="keyword">values</span>(<span class="string">'dyi'</span>, <span class="number">0</span>, <span class="number">2</span>);</span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> <span class="keyword">count</span></span><br><span class="line"><span class="keyword">commit</span>;</span><br></pre></td></tr></table></figure>
+<p><img src="/2019/04/27/view-transaction/assets/markdown-img-paste-20190327223126157.png" alt></p>
+<h5 id="1-4-事务的实现-–-（类似电影《预知未来》）"><a href="#1-4-事务的实现-–-（类似电影《预知未来》）" class="headerlink" title="1.4 事务的实现 – （类似电影《预知未来》）"></a>1.4 事务的实现 – （类似电影《预知未来》）</h5><p>&emsp;&emsp;存储引擎简单瞧瞧后面细讲</p>
+<p><img src="/2019/04/27/view-transaction/assets/markdown-img-paste-20190327220036136.png" alt></p>
+<p>&emsp;&emsp;因为MySQL5之后通常的默认存储引擎是InnoDB所以，以InnoDB为例讲解实现过程</p>
+<p>&emsp;&emsp;MySQL在进行事务处理的时候使用的是日志现行的方式来保证事务可快速和持久运行的，也就是在写数据库前，需要先写日志。当开始一个事务时，会记录该事物的一个LSN日志序列号；当执行事务时，会往InnoDB_Log_Buffer 日志缓冲区里插入事务日志（redo log）;当事务提交时，会将日志缓存区里的事务日志刷入磁盘。这个动作主要是由innodb_flush_log_at_trx_commit这个参数控制的。</p>
+<ol>
+<li>发出commit动作时。已经说明过，commit发出后是否刷日志由变量 innodb_flush_log_at_trx_commit 控制。</li>
+<li>每秒刷一次。这个刷日志的频率由变量 innodb_flush_log_at_timeout 值决定，默认是1秒。要注意，这个刷日志频率和commit动作无关。</li>
+<li>当log buffer中已经使用的内存超过一半时。</li>
+<li>当有checkpoint时，checkpoint在一定程度上代表了刷到磁盘时日志所处的LSN位置。</li>
+</ol>
+<p>&emsp;&emsp;可以通过命令<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> <span class="keyword">engine</span> <span class="keyword">innodb</span> <span class="keyword">status</span>\G;</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>Log sequence number 8619676075 (表示当前的LSN日志序列号)<br><br>Log flushed up to   8619676075 (表示刷新到事物日志的LSN日志序列号)<br><br>Last checkpoint at  8619676075 (表示刷新到磁盘的LSN日志序列号)</p>
 </blockquote>
+<p>&emsp;&emsp;除了记录事务日志意外，数据库还会记录一定量的撤销日志(undo log)， undo与redo正好相反，在对数据进行修改时，由于某种原因失败了，或者人为执行了rollback回滚语句，就可以利用这些撤销日志将数据回滚到修改之前的样子。redo日志保存在ib_logfile0/1/2里，而undo日志保存在ibdata1里，在MySQL5.6里还可以把undo日志单拆分出去。</p>
+<h5 id="1-5-分布式事务（了解）"><a href="#1-5-分布式事务（了解）" class="headerlink" title="1.5 分布式事务（了解）"></a>1.5 分布式事务（了解）</h5><p>&emsp;&emsp;资源管理器：管理事务的提交和回滚，向事务提供资源。<br>&emsp;&emsp;事务管理器：和资源管理器通信，协调完成事务的处理。</p>
+<p>&emsp;&emsp;用于执行分布式事务的过程使用两个阶段；<br>（1）第一阶段：所有的分支被预备。他们被事务管理器告知要准备提交，每个分支资源管理器记录分支的行动并指示认为的可行性。<br>（2）第二阶段：事务管理器告知资源管理器是否要提交或者回滚。如果预备分子时，所有的分支指示他们将能够提交，那么所有的分支被告知提交。如果有一个分支出错，那么就全部都要回滚。特殊情况下，只有一个分支的时候，第二阶段则被省略。</p>
+<p>&emsp;&emsp;分布式事务主要作用在于确保事务的一致性和完整性。他利用分布式的计算环境，将多个事务性的活动合并成一个事务单元，这些事务组合在一起构成原子操作，这些事务的活动要么一起执行并提交事务，要么回滚所有的操作，从而保证了多个活动之间的一致性和完整性。</p>
 
       
     </div>
@@ -510,7 +528,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://17634062908.github.io/2019/04/24/work/" title="追寻本质还是流于形式">https://17634062908.github.io/2019/04/24/work/</a>
+    <a href="https://17634062908.github.io/2019/04/27/view-transaction/" title="Mysql基础之物化视图与事务">https://17634062908.github.io/2019/04/27/view-transaction/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -525,9 +543,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/职业生涯/" <i class="fa fa-tag"> 职业生涯</a>
+            <a href="/tags/Mysql基础/" <i class="fa fa-tag"> Mysql基础</a>
           
-            <a href="/tags/技术规划/" <i class="fa fa-tag"> 技术规划</a>
+            <a href="/tags/Mysql优化/" <i class="fa fa-tag"> Mysql优化</a>
           
         </div>
       
@@ -540,8 +558,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/04/23/blog/" rel="next" title="迟到的博客">
-                <i class="fa fa-chevron-left"></i> 迟到的博客
+              <a href="/2019/04/24/work/" rel="next" title="追寻本质还是流于形式">
+                <i class="fa fa-chevron-left"></i> 追寻本质还是流于形式
               </a>
             
           </div>
@@ -549,10 +567,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/04/27/view-transaction/" rel="prev" title="Mysql基础之物化视图与事务">
-                Mysql基础之物化视图与事务 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -609,8 +623,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -702,6 +725,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-物化视图"><span class="nav-number">1.</span> <span class="nav-text">1. 物化视图</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-存储过程与触发器区别是？"><span class="nav-number">1.0.1.</span> <span class="nav-text">1.2 存储过程与触发器区别是？</span></a></li></ol></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#2-事务"><span class="nav-number">2.</span> <span class="nav-text">2. 事务:</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-0-MyISAM实现事务"><span class="nav-number">2.0.0.1.</span> <span class="nav-text">1.0 MyISAM实现事务</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-1-事务的概念"><span class="nav-number">2.0.0.2.</span> <span class="nav-text">1.1 事务的概念</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-4-事务的实现-–-（类似电影《预知未来》）"><span class="nav-number">2.0.0.3.</span> <span class="nav-text">1.4 事务的实现 – （类似电影《预知未来》）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-5-分布式事务（了解）"><span class="nav-number">2.0.0.4.</span> <span class="nav-text">1.5 分布式事务（了解）</span></a></li></ol></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
