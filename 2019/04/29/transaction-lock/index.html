@@ -123,7 +123,7 @@
 <meta property="og:image" content="https://17634062908.github.io/2019/04/29/transaction-lock/markdown-img-paste-20190329222153765.png">
 <meta property="og:image" content="https://17634062908.github.io/2019/04/29/transaction-lock/markdown-img-paste-20190329232509298.png">
 <meta property="og:image" content="https://17634062908.github.io/2019/04/29/transaction-lock/markdown-img-paste-20190329232519892.png">
-<meta property="og:updated_time" content="2019-04-29T03:37:17.225Z">
+<meta property="og:updated_time" content="2019-04-29T03:41:19.480Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mysql基础之事务与锁">
 <meta name="twitter:description" content="&amp;emsp;&amp;emsp;锁是计算机协调多个进程或线程并发访问某一资源的机制。&amp;emsp;&amp;emsp;相对其他数据库而言，MySQL的锁机制比较简单，其最显著的特点是不同的存储引擎支持不同的锁机制。比如，MyISAM存储引擎采用的是表级锁（table-level locking）；BDB存储引擎采用的是页面锁（page-level locking），但也支持表级锁(已过时)；InnoDB存储引擎既支">
@@ -556,9 +556,9 @@
 <p><img src="/2019/04/29/transaction-lock/markdown-img-paste-20190329232519892.png" alt></p>
 <p>关于意向锁；<br><br>&emsp;&emsp;意向锁是表级锁，其设计目的主要是为了在一个事务中揭示下一行将要被请求锁的类型。InnoDB 中的两个表锁：</p>
 <p>&emsp;&emsp;意向共享锁（IS）：表示事务准备给数据行加入共享锁，也就是说一个数据行加共享锁前必须先取得该表的 IS 锁。如果需要对记录 A 加共享锁，那么此时 InnoDB 会先找到这张表，对该表加意向共享锁之后，再对记录 A 添加共享锁</p>
-<p>&emsp;&emsp;意向排他锁（IX）：类似上面，表示事务准备给数据行加入排他锁，也就是说事务在给一个数据行加排他锁前必须先取得该表的 IX 锁。如果需要对记录 A 加排他锁，那么此时 InnoDB 会先找到这张表，对该表加意向排他锁之后，再对记录 A 添加排他锁<br>意向锁是 InnoDB 自动加的，不需要用户干预</p>
-<p>&emsp;&emsp;共享锁和排他锁，系统在特定的条件下会自动添加共享锁或者排他锁，也可以手动添加共享锁或者排他锁。<br>意向共享锁和意向排他锁都是系统自动添加和自动释放的，整个过程无需人工干预</p>
-<p>&emsp;&emsp;共享锁和排他锁都是锁的行记录，意向共享锁和意向排他锁锁定的是表</p>
+<p>&emsp;&emsp;意向排他锁（IX）：类似上面，表示事务准备给数据行加入排他锁，也就是说事务在给一个数据行加排他锁前必须先取得该表的 IX 锁。如果需要对记录 A 加排他锁，那么此时 InnoDB 会先找到这张表，对该表加意向排他锁之后，再对记录 A 添加排他锁。<br>&emsp;&emsp;意向锁是 InnoDB 自动加的，不需要用户干预。</p>
+<p>&emsp;&emsp;共享锁和排他锁，系统在特定的条件下会自动添加共享锁或者排他锁，也可以手动添加共享锁或者排他锁。<br>&emsp;&emsp;意向共享锁和意向排他锁都是系统自动添加和自动释放的，整个过程无需人工干预。</p>
+<p>&emsp;&emsp;共享锁和排他锁都是锁的行记录，意向共享锁和意向排他锁锁定的是表。</p>
 
       
     </div>
