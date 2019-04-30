@@ -1978,7 +1978,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #ff3b3e;
+  background: #7828ff;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -3184,6 +3184,9 @@ pre .javascript .function {
 }
 .with-love {
   color: #ff71a8;
+}
+* {
+  cursor: url("/images/mouse.ico"), default !important;
 }
 @-moz-keyframes heartAnimate {
   0%, 100% {
