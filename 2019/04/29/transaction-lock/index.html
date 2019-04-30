@@ -99,7 +99,7 @@
 <meta name="description" content="&amp;emsp;&amp;emsp;锁是计算机协调多个进程或线程并发访问某一资源的机制。&amp;emsp;&amp;emsp;相对其他数据库而言，MySQL的锁机制比较简单，其最显著的特点是不同的存储引擎支持不同的锁机制。比如，MyISAM存储引擎采用的是表级锁（table-level locking）；BDB存储引擎采用的是页面锁（page-level locking），但也支持表级锁(已过时)；InnoDB存储引擎既支">
 <meta name="keywords" content="Mysql基础,Mysql优化">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Mysql基础之事务与锁">
+<meta property="og:title" content="Mysql基础之事务日志与锁初体验">
 <meta property="og:url" content="https://17634062908.github.io/2019/04/29/transaction-lock/index.html">
 <meta property="og:site_name" content="晏南风i">
 <meta property="og:description" content="&amp;emsp;&amp;emsp;锁是计算机协调多个进程或线程并发访问某一资源的机制。&amp;emsp;&amp;emsp;相对其他数据库而言，MySQL的锁机制比较简单，其最显著的特点是不同的存储引擎支持不同的锁机制。比如，MyISAM存储引擎采用的是表级锁（table-level locking）；BDB存储引擎采用的是页面锁（page-level locking），但也支持表级锁(已过时)；InnoDB存储引擎既支">
@@ -123,9 +123,9 @@
 <meta property="og:image" content="https://17634062908.github.io/2019/04/29/transaction-lock/markdown-img-paste-20190329222153765.png">
 <meta property="og:image" content="https://17634062908.github.io/2019/04/29/transaction-lock/markdown-img-paste-20190329232509298.png">
 <meta property="og:image" content="https://17634062908.github.io/2019/04/29/transaction-lock/markdown-img-paste-20190329232519892.png">
-<meta property="og:updated_time" content="2019-04-29T03:41:19.480Z">
+<meta property="og:updated_time" content="2019-04-30T07:45:15.104Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Mysql基础之事务与锁">
+<meta name="twitter:title" content="Mysql基础之事务日志与锁初体验">
 <meta name="twitter:description" content="&amp;emsp;&amp;emsp;锁是计算机协调多个进程或线程并发访问某一资源的机制。&amp;emsp;&amp;emsp;相对其他数据库而言，MySQL的锁机制比较简单，其最显著的特点是不同的存储引擎支持不同的锁机制。比如，MyISAM存储引擎采用的是表级锁（table-level locking）；BDB存储引擎采用的是页面锁（page-level locking），但也支持表级锁(已过时)；InnoDB存储引擎既支">
 <meta name="twitter:image" content="https://17634062908.github.io/2019/04/29/transaction-lock/mysql.png">
 
@@ -163,7 +163,7 @@
 
 
 
-  <title>Mysql基础之事务与锁 | 晏南风i</title>
+  <title>Mysql基础之事务日志与锁初体验 | 晏南风i</title>
   
 
 
@@ -343,7 +343,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Mysql基础之事务与锁</h1>
+          <h1 class="post-title" itemprop="name headline">Mysql基础之事务日志与锁初体验</h1>
         
 
         <div class="post-meta">
@@ -406,7 +406,7 @@
 
           
           
-             <span id="/2019/04/29/transaction-lock/" class="leancloud_visitors" data-flag-title="Mysql基础之事务与锁">
+             <span id="/2019/04/29/transaction-lock/" class="leancloud_visitors" data-flag-title="Mysql基础之事务日志与锁初体验">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -618,7 +618,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://17634062908.github.io/2019/04/29/transaction-lock/" title="Mysql基础之事务与锁">https://17634062908.github.io/2019/04/29/transaction-lock/</a>
+    <a href="https://17634062908.github.io/2019/04/29/transaction-lock/" title="Mysql基础之事务日志与锁初体验">https://17634062908.github.io/2019/04/29/transaction-lock/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -657,6 +657,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/04/30/transaction-lock-relation/" rel="prev" title="Mysql基础之事务日志与锁关系">
+                Mysql基础之事务日志与锁关系 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -740,7 +744,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -866,7 +870,7 @@
 <span class="post-meta-divider">|</span>
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共13.3k字</span>
+  <span class="post-count">博客全站共15.3k字</span>
 </div>
 
 
