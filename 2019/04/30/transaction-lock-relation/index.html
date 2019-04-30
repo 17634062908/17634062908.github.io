@@ -106,7 +106,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://17634062908.github.io/2019/04/30/transaction-lock-relation/mysql.png">
 <meta property="og:image" content="https://17634062908.github.io/2019/04/30/transaction-lock-relation/assets/markdown-img-paste-20190402210945380.png">
-<meta property="og:updated_time" content="2019-04-30T07:46:26.902Z">
+<meta property="og:updated_time" content="2019-04-30T07:48:07.939Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mysql基础之事务日志与锁关系">
 <meta name="twitter:description" content="&amp;emsp;&amp;emsp;事务隔离级别是并发控制的整体解决方案，其实际上是综合利用各种类型的锁和行版本控制，来解决并发问题。&amp;emsp;&amp;emsp;锁是数据库并发控制的内部机制，是基础。当然，数据库同时还会利用行版本控制（SQL Server 2005 及以上）来进行并发控制；在数据库内部还使用闩（latch），互斥（mutex）等机制处理内部资源（如，缓存）的并发访问。&amp;emsp;&amp;emsp;对用">
@@ -420,7 +420,7 @@
       
 
       
-        <p><img src="/2019/04/30/transaction-lock-relation/mysql.png" alt><br>&emsp;&emsp;事务隔离级别是并发控制的整体解决方案，其实际上是综合利用各种类型的锁和行版本控制，来解决并发问题。<br>&emsp;&emsp;锁是数据库并发控制的内部机制，是基础。当然，数据库同时还会利用行版本控制（SQL Server 2005 及以上）来进行并发控制；在数据库内部还使用闩（latch），互斥（mutex）等机制处理内部资源（如，缓存）的并发访问。<br>&emsp;&emsp;对用户来说，只有当事务隔离级别无法解决一些并发问题和需求时，才有必要在语句中手动设置锁。不适当的设置锁，可能会导致严重的阻塞和死锁。建议，只有在完全了解锁机制的情况下，才可以在语句中手动设置锁，否则应该使用事务隔离级别。</p>
+        <p><img src="/2019/04/30/transaction-lock-relation/mysql.png" alt><br>&emsp;&emsp;事务隔离级别是并发控制的整体解决方案，其实际上是综合利用各种类型的锁和行版本控制，来解决并发问题。<br>&emsp;&emsp;锁是数据库并发控制的内部机制，是基础。当然，数据库同时还会利用行版本控制（SQL Server 2005 及以上）来进行并发控制；在数据库内部还使用闩（latch），互斥（mutex）等机制处理内部资源（如，缓存）的并发访问。<br>&emsp;&emsp;对用户来说，只有当事务隔离级别无法解决一些并发问题和需求时，才有必要在语句中手动设置锁。不适当的设置锁，可能会导致严重的阻塞和死锁。建议，只有在完全了解锁机制的情况下，才可以在语句中手动设置锁，否则应该使用事务隔离级别。<br><a id="more"></a></p>
 <h2 id="1-事务的隔离级别"><a href="#1-事务的隔离级别" class="headerlink" title="1. 事务的隔离级别"></a>1. 事务的隔离级别</h2><p>&emsp;&emsp;事务的隔离性是多个用户并发访问数据库时，数据库为每一个用户开启的事务，不能被其他事务的操作数据所干扰，多个并发事务之间要相互隔离。</p>
 <p>&emsp;&emsp;在并发下事务会容易出现一些问题：<br>&emsp;&emsp;<em> 数据更新丢失：两个事务同时操作一条数据，一个事务因为异常导致数据更新丢失<br>&emsp;&emsp;</em> 脏读 ：一个失误开始读取了某行数据，另外一个事务已经更新了此数据但没有能够及时提交。这是相当危险的，因为很可能所有的操作都被回滚。<br>&emsp;&emsp;<em> 不可重复读：一个事务对同一行数据重复读取两次，但是却得到了不同的结果。例如，在两次读取的中途，有另外一个事务对该型数据进行了修改，并提交。<br>&emsp;&emsp;</em> 幻读：事务在操作过程中进行两次查询，第二次查询的结果包含了第一次查询中未出现的数据（SQL不一定一样）。这是因为在两次查询过程中有另外一个事务插入数据</p>
 <p>&emsp;&emsp;在MySQL中存在（InnoDB）事务存在着4中隔离级别，不同的隔离级别对事务的处理不同。<br>&emsp;&emsp;<em> 未授权读取（未提交读 Read Uncommitted）：READ-UNCOMMITTED | &emsp;&emsp;0：存在脏读，不可重复读，幻读的问题。如果一个事务已经开始写数据，则另外一个数据则不会允许同时进行写操作，但允许其他事务读此行数据。隔离级别可以通过“排他写锁”实现。<br>&emsp;&emsp;</em> 授权读取（已读提交 Read committed）：READ-COMMITTED | &emsp;&emsp;1：解决脏读的问题，存在不可重复读，幻读的问题。这个可以通过“排他写锁”实现。读取数据的事务允许其他事务继续访问该行数据，但是未提交的写事务将会禁止其他事务访问该行。<br>&emsp;&emsp;<em> 可重复读取（Repeatable Read）：REPEATABLE-READ | &emsp;&emsp;2：解决脏读，不可重复读的问题，存在幻读的问题，默认隔离级别。可通过“共享锁”，“排他锁”实现。读取数据的事务将会禁止写事务（但允许读事务），写事务则禁止任何其他事务。<br>&emsp;&emsp;</em> 序列化（Serializable）：SERIALIZABLE | &emsp;&emsp;3：解决脏读，不可重复读，幻读，可保证事务安全，但完全串行执行，性能最低。提供严格的事务隔离。它要求事务序列化执行，事务只能一个接着一个地执行，不能并发执行。如果仅仅通过“行级锁”是无法实现事务序列化的，必须要通过其他机制保证新插入的数据不会被刚执行查询操作的事务访问到。</p>
